@@ -61,8 +61,8 @@
   "bugs": {
     "url": "https://github.com/G4brym/workers-qb/issues"
   },
-  "dependencies": {},
   "devDependencies": {
+    "@cloudflare/workers-types": "^3.18.0",
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
     "@types/jest": "^27.0.1",
