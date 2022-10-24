@@ -1,6 +1,6 @@
 import { QueryBuilder } from './Builder'
 import { FetchTypes } from './enums'
-import { Params } from './interfaces'
+import { Meta, Params } from "./interfaces";
 
 // @ts-ignore
 const now = typeof globalThis.performance === 'undefined' ? () => Date.now() : () => globalThis.performance.now()
@@ -25,12 +25,14 @@ export class D1QB extends QueryBuilder {
     )
     const end = {
       query: 'BATCH',
+      db_duration: 0,
       worker_duration: now() - prev,
     }
-    const meta: any[] = []
+    const meta: Meta[] = []
 
     results.forEach((r, i) => {
       batchedDB.queries[i].resolve(r)
+      end.db_duration += r.duration
       meta.push({
         ...batchedDB.queries[i].params,
         db_duration: r.duration,

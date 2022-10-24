@@ -84,7 +84,7 @@ export class QueryBuilder {
     } else {
       const columns = params.columns.join(', ')
       let bindingNum = 1
-      const values = params.rows.map((row) => `(${row.map(() => bindingNum++).join(',')})`).join(',')
+      const values = params.rows.map((row) => `(${row.map(() => '?' + bindingNum++).join(',')})`).join(',')
 
       return `INSERT INTO ${params.tableName} (${columns}) VALUES ${values}` + this._returning(params.returning)
     }
